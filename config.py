@@ -18,6 +18,8 @@ class Config(object):
 
     FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
 
+    LANGUAGES = ['en', 'es']
+
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
@@ -25,3 +27,5 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['bedfordap1@gmail.com']
     # list of emails to receive error reports
+
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')

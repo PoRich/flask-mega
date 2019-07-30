@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -6,7 +6,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
-from flask_babel import Babel
+from flask_babel import Babel, lazy_gettext as _l
 import logging, os
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
@@ -18,19 +18,19 @@ migrate = Migrate(app, db)
 # db.create_all()  # created through database migrations-TBC
 mail = Mail(app)
 login = LoginManager(app)
-login.login_view = 'login'  # registers login function/endpoint with flask_login
-bootstrap = Bootstrap(app)  # https://pythonhosted.org/Flask-Bootstrap/basic-usage.html#available-blocks
+login.login_view = 'login'
+# registers login function/endpoint with flask_login
+login.login_message = _l('Please log in to access this page')
+# override default login message so to enable translation
+bootstrap = Bootstrap(app)
+# https://pythonhosted.org/Flask-Bootstrap/basic-usage.html#available-blocks
 moment = Moment(app)
 babel = Babel(app)
 
 from application import routes, models, errors
 
-@babel.localeselector
-def get_locale():
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 #  ERROR HANDLING
-
 '''
 note: emailing error logs from gmail requires changing security settings,
 allowing for less secure apps
@@ -63,3 +63,9 @@ if not app.debug:
 
     app.logger.setLevel(logging.INFO) # DEBUG, INFO, WARNING, ERROR, CRITICAL
     app.logger.info('Microblog startup')
+
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    #return 'es'
