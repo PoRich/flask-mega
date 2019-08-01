@@ -1,7 +1,9 @@
+from flask import current_app
 from hashlib import md5
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin # adds is_authenticated, is_active, is_anonymous, get_id
+from flask_login import UserMixin
+# adds is_authenticated, is_active, is_anonymous, get_id
 from time import time
 import jwt
 from application import db, login
@@ -54,11 +56,15 @@ db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
 '''  table not declared as a model b/c this is an auxi table with no other data
 other than foreign keys '''
-#  many-to-many relationships https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/#many-to-many-relationships
+#  many-to-many relationships
+# https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/#many-to-many-relationships
 followers = db.Table('followers',
-    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
-    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
-)
+                     db.Column('follower_id', db.Integer, db.ForeignKey(
+                               'user.id')),
+                     db.Column('followed_id', db.Integer, db.ForeignKey(
+                               'user.id'))
+                     )
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -69,9 +75,12 @@ class User(UserMixin, db.Model):
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     followed = db.relationship('User', secondary=followers,
-        primaryjoin=(followers.c.follower_id == id),
-        secondaryjoin=(followers.c.followed_id == id),
-        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
+                               primaryjoin=(followers.c.follower_id == id),
+                               secondaryjoin=(followers.c.followed_id == id),
+                               backref=db.backref('followers', lazy='dynamic'),
+                                                  lazy='dynamic')
+
+
     '''
     querying this relationship from the left side will produce a list of
     followed users (those on the right side);
@@ -95,6 +104,8 @@ class User(UserMixin, db.Model):
 
     (second) lazy applies to the left side query instead of the right side
     '''
+
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
@@ -112,11 +123,13 @@ class User(UserMixin, db.Model):
 
     def follow(self, user):
         if not self.is_following(user):
-            self.followed.append(user)  # standard SQLAlchemy ORM way to add relatinship
+            self.followed.append(user)
+            # standard SQLAlchemy ORM way to add relationship
 
     def unfollow(self, user):
         if self.is_following(user):
-            self.followed.remove(user)  # standard SQLAlchemy ORM way to remove relatinship
+            self.followed.remove(user)
+            # standard SQLAlchemy ORM way to remove relatinship
 
     def is_following(self, user):
         return self.followed.filter(
@@ -131,8 +144,8 @@ class User(UserMixin, db.Model):
 
     def followed_posts(self):
         followed = Post.query.join(followers,
-        (followers.c.followed_id == Post.user_id)).filter(
-        followers.c.follower_id == self.id)
+            (followers.c.followed_id == Post.user_id)).filter(
+            followers.c.follower_id == self.id)
 
         own = Post.query.filter_by(user_id=self.id)
 
