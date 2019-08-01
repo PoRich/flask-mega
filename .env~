@@ -1,5 +1,7 @@
 source venv/bin/activate
 
+export APP_SETTINGS="config.DevelopmentConfig"
+
 export FLASK_ENV=development
 
 export SECRET_KEY=b'\xa93\xe4\xa0}\xda.NC\x15q0\x94\xc2\x8d|'
@@ -12,4 +14,8 @@ export MAIL_USE_TLS=1
 export MAIL_USERNAME='bedfordap1@gmail.com'
 export MAIL_PASSWORD='vXjWhfwTpo+N3'
 
+export MS_TRANSLATOR_KEY='e5ec5b69911f46e4aefe6caa3271a69f'
+
 export ELASTICSEARCH_URL='http://localhost:9200'
+
+

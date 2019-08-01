@@ -1,3 +1,5 @@
+import logging, os
+from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask import current_app, Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -6,10 +8,8 @@ from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_babel import Babel, lazy_gettext as _l
-import logging, os
-from logging.handlers import SMTPHandler, RotatingFileHandler
 from elasticsearch import Elasticsearch
-from config import Config
+from config import DevelopmentConfig, ProductionConfig
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -26,13 +26,13 @@ moment = Moment()
 babel = Babel()
 
 
-def create_app(config_class=Config):
+def create_app(Config=DevelopmentConfig):
     app = Flask(__name__)
-    app.config.from_object(config_class)
+    app.config.from_object(Config)
 
     db.init_app(app)
 
-    #with app.app_context():
+    # with app.app_context():
     #    db.create_all()
 
     migrate.init_app(app, db)

@@ -19,9 +19,9 @@ class Config(object):
 
     POSTS_PER_PAGE = 3
 
-    FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
-
     LANGUAGES = ['en', 'es']
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
+
 
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
@@ -31,16 +31,20 @@ class Config(object):
     ADMINS = ['bedfordap1@gmail.com']
     # list of emails to receive error reports
 
-    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
+
+class DevelopmentConfig(Config):
+    # NOT IN USE - need to configure app factory to use APP_SETTINGS
+    FLASK_APP = 'wsgi.py'
+    ENV = 'development'
+    DEBUG = 1
 
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
-
-    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
 
 
 class ProductionConfig(Config):
     # NOT IN USE - need to configure app factory to use APP_SETTINGS
     FLASK_APP = 'wsgi.py'
+    ENV = 'production'
 
     DEBUG = 0
     DEVELOPMENT = 0
@@ -48,3 +52,5 @@ class ProductionConfig(Config):
 
     DATABASE_URL = 'postgres://ijukbfnwqsckxp:5f35e6f8e73079f1e7b6a9799b12cf2935183f8f90ac4b9b286bc5b5935d3b61@ec2-50-16-225-96.compute-1.amazonaws.com:5432/d5vvard2u9haa3'
     ELASTICSEARCH_URL = 'https://paas:9b63e550a6ea0bf4ada40ffb1a5cb59a@thorin-us-east-1.searchly.com'
+
+    WEB_CONCURRENCY = 2
