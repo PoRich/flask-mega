@@ -20,7 +20,8 @@ class Config(object):
     POSTS_PER_PAGE = 3
 
     LANGUAGES = ['en', 'es']
-    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY') or \
+        'e5ec5b69911f46e4aefe6caa3271a69f'
 
 
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
@@ -34,7 +35,6 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     # NOT IN USE - need to configure app factory to use APP_SETTINGS
-    FLASK_APP = 'wsgi.py'
     ENV = 'development'
     DEBUG = 1
 
@@ -43,7 +43,6 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     # NOT IN USE - need to configure app factory to use APP_SETTINGS
-    FLASK_APP = 'wsgi.py'
     ENV = 'production'
 
     DEBUG = 0
@@ -54,3 +53,9 @@ class ProductionConfig(Config):
     ELASTICSEARCH_URL = 'https://paas:9b63e550a6ea0bf4ada40ffb1a5cb59a@thorin-us-east-1.searchly.com'
 
     WEB_CONCURRENCY = 2
+
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = int(586)
+    MAIL_USE_TLS = 1
+    MAIL_USERNAME = 'bedfordap1@gmail.com'
+    MAIL_PASSWORD = 'vXjWhfwTpo+N3'
