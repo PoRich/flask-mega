@@ -56,8 +56,10 @@ class ProductionConfig(Config):
     WEB_CONCURRENCY = 2
 
     MAIL_SERVER = 'mail.bedfordap.com'
-    MAIL_PORT = int(465)
+    MAIL_PORT = int(26)
     MAIL_USE_TLS = 0
     MAIL_USE_SSL = 0
     MAIL_USERNAME = 'info@bedfordap.com'
     MAIL_PASSWORD = 'i3;osZX7u6Xp3'
+
+    SECURITY_EMAIL_SENDER = 'info@bedfordap.com'
