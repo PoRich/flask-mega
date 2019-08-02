@@ -30,7 +30,7 @@ class Config(object):
     MAIL_USE_SSL = os.environ.get('MAIL_USE_SSL') is not None
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    ADMINS = ['bedfordap1@gmail.com']
+    ADMINS = ['info@bedfordap.com']
     # list of emails to receive error reports
 
 
@@ -55,9 +55,9 @@ class ProductionConfig(Config):
 
     WEB_CONCURRENCY = 2
 
-    MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_PORT = int(587)
-    MAIL_USE_TLS = 1
+    MAIL_SERVER = 'mail.bedfordap.com'
+    MAIL_PORT = int(465)
+    MAIL_USE_TLS = 0
     MAIL_USE_SSL = 0
-    MAIL_USERNAME = 'bedfordap1@gmail.com'
-    MAIL_PASSWORD = 'vXjWhfwTpo+N3'
+    MAIL_USERNAME = 'info@bedfordap.com'
+    MAIL_PASSWORD = 'i3;osZX7u6Xp3'
