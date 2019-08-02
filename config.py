@@ -27,6 +27,7 @@ class Config(object):
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
+    MAIL_USE_SSL = os.environ.get('MAIL_USE_SSL') is not None
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['bedfordap1@gmail.com']
@@ -55,7 +56,8 @@ class ProductionConfig(Config):
     WEB_CONCURRENCY = 2
 
     MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_PORT = int(586)
+    MAIL_PORT = int(587)
     MAIL_USE_TLS = 1
+    MAIL_USE_SSL = 0
     MAIL_USERNAME = 'bedfordap1@gmail.com'
     MAIL_PASSWORD = 'vXjWhfwTpo+N3'
