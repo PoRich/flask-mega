@@ -33,6 +33,12 @@ class Config(object):
     ADMINS = ['info@bedfordap.com']
     # list of emails to receive error reports
 
+    MAILGUN_KEY = os.environ.get('MAILGUN_KEY')
+    MAILGUN_SERVER = os.environ.get('MAILGUN_SERVER')
+    MAILGUN_PORT = os.environ.get('MAILGUN_PORT')
+    MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
+    MAILGUN_PW = os.environ.get('MAILGUN_PW')
+
 
 class DevelopmentConfig(Config):
     # NOT IN USE - need to configure app factory to use APP_SETTINGS
