@@ -75,7 +75,6 @@ def create_app(Config=DevelopmentConfig):
                 credentials=auth, secure=secure)
             mail_handler.setLevel(logging.ERROR)  # reports only errors, not warnings
             app.logger.addHandler(mail_handler)  # attach to flask's logger object
-            print('email sent')
         if app.config['LOG_TO_STDOUT']:
             stream_handler = logging.StreamHandler()
             stream_handler.setLevel(logging.INFO)
