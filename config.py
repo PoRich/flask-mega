@@ -9,8 +9,7 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or \
         b'\x15(\x14\x1c\xf2\xc7i\xa7(\xcf\t-\xd1*\x11\xf7'
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'postgresql://federer:grandestslam@localhost:5432/flaskmega'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     # 'sqlite:///' + os.path.join(basedir,'app.db')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = \
@@ -50,16 +49,16 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     # NOT IN USE - need to configure app factory to use APP_SETTINGS
-    ENV = 'production'
+    ENV = 'development'
 
-    DEBUG = 0
+    DEBUG = 1
     DEVELOPMENT = 0
     LOG_TO_STDOUT = 1
 
     DATABASE_URL = 'postgres://ijukbfnwqsckxp:5f35e6f8e73079f1e7b6a9799b12cf2935183f8f90ac4b9b286bc5b5935d3b61@ec2-50-16-225-96.compute-1.amazonaws.com:5432/d5vvard2u9haa3'
     ELASTICSEARCH_URL = 'https://paas:9b63e550a6ea0bf4ada40ffb1a5cb59a@thorin-us-east-1.searchly.com'
 
-    WEB_CONCURRENCY = 2
+    WEB_CONCURRENCY = 4
 
     MAIL_SERVER = 'mail.bedfordap.com'
     MAIL_PORT = int(26)
