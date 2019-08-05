@@ -38,6 +38,8 @@ class Config(object):
     MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
     MAILGUN_PW = os.environ.get('MAILGUN_PW')
 
+    SENDGRID_USERNAME = 'app141509359@heroku.com'
+    SENDGIRD_PASSWORD = 'sxo6htta4345'
 
 class DevelopmentConfig(Config):
     # NOT IN USE - need to configure app factory to use APP_SETTINGS
