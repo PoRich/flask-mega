@@ -44,5 +44,3 @@ class ProductionConfig(Config):
     DEBUG = 0
     LOG_TO_STDOUT = 1
     WEB_CONCURRENCY = 4
-
-    MAIL_USE_SSL = os.environ.get('MAIL_USE_SSL') is not None
