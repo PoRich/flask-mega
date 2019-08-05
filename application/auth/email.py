@@ -2,9 +2,9 @@ import requests
 import smtplib
 from email.mime.text import MIMEText
 from flask import current_app, render_template
-# from flask_mail import Message
+from flask_mail import Message
 from flask_babel import _
-# from application import mail
+from application import mail
 from threading import Thread  # multiprocessing is an alternative module
 
 
