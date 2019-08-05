@@ -16,7 +16,7 @@ class Config(object):
         os.environ.get('SQLALCHEMY_TRACK_MODIFICATIONS') or \
         False
 
-    POSTS_PER_PAGE = 3
+    POSTS_PER_PAGE = 5
 
     LANGUAGES = ['en', 'es']
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY') or \
@@ -32,14 +32,6 @@ class Config(object):
     ADMINS = ['info@bedfordap.com']
     # list of emails to receive error reports
 
-    MAILGUN_KEY = os.environ.get('MAILGUN_KEY')
-    MAILGUN_SERVER = os.environ.get('MAILGUN_SERVER')
-    MAILGUN_PORT = os.environ.get('MAILGUN_PORT')
-    MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
-    MAILGUN_PW = os.environ.get('MAILGUN_PW')
-
-    SENDGRID_USERNAME = 'app141509359@heroku.com'
-    SENDGIRD_PASSWORD = 'sxo6htta4345'
 
 class DevelopmentConfig(Config):
     # NOT IN USE - need to configure app factory to use APP_SETTINGS
@@ -51,9 +43,9 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     # NOT IN USE - need to configure app factory to use APP_SETTINGS
-    ENV = 'development'
+    ENV = 'production'
 
-    DEBUG = 1
+    DEBUG = 0
     DEVELOPMENT = 0
     LOG_TO_STDOUT = 1
 
