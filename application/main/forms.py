@@ -40,3 +40,9 @@ class SearchForm(FlaskForm):
             kwargs['csrf_enabled'] = False
             # csrf needs to be disabled for clickable search links to work
         super(SearchForm, self).__init__(*args, **kwargs)
+
+
+class MessageForm(FlaskForm):
+    message = TextAreaField(_l('Message'), validators=[
+        DataRequired(), Length(min=0, max=140)])
+    submit = SubmitField(_('Submit'))
