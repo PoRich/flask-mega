@@ -1,4 +1,7 @@
-import logging, os
+import logging
+import os
+from redis import Redis
+import rq
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask import current_app, Flask, request
 from flask_sqlalchemy import SQLAlchemy
@@ -53,6 +56,9 @@ def create_app(Config=DevelopmentConfig):
 
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
         if app.config['ELASTICSEARCH_URL'] else None
+
+    app.redis = Redis.from_url(app.config['REDIS_URL'])
+    app.task_queue = rq.Queue('microblog-tasks', connection=app.redis)
 
     #  ERROR HANDLING
     '''
