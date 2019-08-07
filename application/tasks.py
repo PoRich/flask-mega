@@ -6,6 +6,7 @@ from rq import get_current_job
 from application import create_app, db
 from application.models import Post, Task, User
 from application.email import send_email
+from config import ProductionConfig
 
 
 app = create_app(ProductionConfig)  # separate app for separate processes
