@@ -1,3 +1,4 @@
+# application/__init__.py
 import logging
 import os
 from redis import Redis
@@ -60,6 +61,9 @@ def create_app(Config=DevelopmentConfig):
     app.redis = Redis.from_url(app.config['REDIS_URL'])
     app.task_queue = rq.Queue('microblog-tasks', connection=app.redis)
 
+    from application.api import bp as api_bp
+    app.register_blueprint(api_bp, url_prefix='/api')
+    
     #  ERROR HANDLING
     '''
     note: emailing error logs from gmail requires changing security settings,
