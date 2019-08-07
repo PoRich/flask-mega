@@ -8,7 +8,7 @@ from application.models import Post, Task, User
 from application.email import send_email
 
 
-app = create_app()  # separate app for separate processes
+app = create_app(ProductionConfig)  # separate app for separate processes
 app.app_context().push()
 '''pushing a context makes the app "current" app instance thus enabling
 extensions (Flask-SQLAlchemy, etc) to use current_app.config to get their
